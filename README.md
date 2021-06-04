@@ -27,6 +27,5 @@
 
 ----------------------------------------------
 Data de Entrega: 20/06
-Fazer o projeto no Netbeans, e postar no tidia um pasta zipa-
-da, que inclua o relatório, e cujo nome deve ser o formado por
-nossos números USP.
+
+Fazer o projeto no Netbeans, e postar no tidia um pasta zipada, que inclua o relatório, e cujo nome deve ser o formado por nossos números USP.

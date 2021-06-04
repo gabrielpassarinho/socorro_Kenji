@@ -1,0 +1,9 @@
+Eu nao sei se eu ainda sei usar TAD direito, maaaass
+
+	(i) incluir na main o .h do tad;
+	(ii) incluir no .c do tad o .h;
+	(iii) compilar o tad e a main separadamente
+		gcc -c [piquepique].c
+		gcc -c main.c
+	e depois juntar tudo em um único executável
+		gcc -o main.exe [piquepique].o main.o
