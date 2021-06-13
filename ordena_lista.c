@@ -1,7 +1,9 @@
-#include "lista.h"
+/**/
 #include <stdio.h>
 #include <stdlib.h>
+#include "ordena_lista.h"
 
+/*Funções de Lista*/
 void cria(lista *l){
     l->tamanho = 0;
     l->elementos = malloc(sizeof(elem)*TAM);
@@ -10,7 +12,7 @@ void cria(lista *l){
 }
 
 void destroi(lista *l){
-    free(lista->elementos);
+    free(l->elementos);
     l->tamanho = 0;
 	
 	return;
@@ -18,7 +20,7 @@ void destroi(lista *l){
 
 int insere(lista *l, elem e){
     if(l->tamanho <= TAM){
-        lista->elem[l->tamanho] = e;
+        l->elementos[l->tamanho] = e;
 		l->tamanho++;
 		return 1; // insercao deu certo
     } else
@@ -40,6 +42,7 @@ void imprime(lista *l){
 	return;
 }
 
+/*
 void ordena_bubble_sort(lista *l) {
 	int ordenado = 0; // se ordenado == 1, vetor estah ordenado; 0, c.c.
 	int i, j, aux = 0, 0, 0;
@@ -61,7 +64,6 @@ void ordena_bubble_sort(lista *l) {
 	return;
 }
 
-// void ordena_quick_sort(lista *l);
 
 void ordena_contagem(lista *l, long ordem){ // funcao auxiliar da ordena_radix_sort
 	int i; //contador
@@ -101,3 +103,97 @@ void ordena_radix_sort(lista *l){
 }
 
 // void ordena_heap_sort(lista *l);
+*/
+
+
+/***********/
+/*Quicksort*/
+/***********/
+
+int partition(elem *A, int inicio, int fim){
+  elem aux;
+  elem pivo = A[fim];
+  int i = inicio - 1;
+  for(int j = inicio; j<fim; j++){
+    if(A[j] < pivo){
+      i = i + 1;
+      aux = A[i];
+      A[i] = A[j];
+      A[j] = aux;
+    }
+  }
+
+  aux = A[i+1];
+  A[i+1] = A[fim];
+  A[fim] = aux;
+  return(i+1);
+}
+
+int random_partition(elem *A, int inicio, int fim){
+  elem aux;
+  int k = rand() % (fim + 1 - inicio) + inicio;
+
+  aux = A[fim];
+  A[fim] = A[k];
+  A[k] = aux;
+
+  return partition(A, inicio, fim);
+}
+
+void quicksort(elem *A, int inicio, int fim){
+  int pivo;
+  if (inicio < fim){
+    pivo = random_partition(A, inicio, fim);
+
+    quicksort(A, inicio, pivo-1);
+    quicksort(A, pivo+1, fim);
+  }
+}
+
+void ordena_quick_sort(lista *l){
+  quicksort(l->elementos, 0, l->tamanho-1);
+}
+
+/***********/
+/*HeapSort*/
+/***********/
+
+void heapfy(elem *A,int n,int i){
+  int maior = i;
+  int esq = (2*i) + 1;
+  int dir = (2*i) + 2;
+  elem aux;
+  if(esq < n && A[esq] > A[maior]){
+    maior = esq;
+  }
+  if(dir < n && A[dir]>A[maior]){
+    maior = dir;
+  }
+  if(maior != i){
+    aux = A[i];
+    A[i] = A[maior];
+    A[maior] = aux;
+    heapfy(A,n,maior);
+  }
+}
+
+void heapsort(elem *A, int n){
+  int i;
+  elem aux;
+  for(i=n/2 - 1; i >= 0; i--){
+    heapfy(A, n, i);
+  }
+
+  for(i=n-1; i>=1;i--){
+    aux = A[0];
+    A[0] = A[i];
+    A[i] = aux;
+    heapfy(A, i, 0);
+  }
+}
+
+void ordena_heap_sort(lista *l){
+  heapsort(l->elementos, l->tamanho);
+}
+
+
