@@ -42,6 +42,18 @@ void imprime(lista *l){
 	return;
 }
 
+int copia(lista *l1, lista *l2){
+	if(l2->TAM_MAX !=  l1->TAM_MAX)
+		return 0;
+	
+	for(int i = 0; i <= l1->tamanho; i++)
+		l2->elementos[i] = l1->elementos[i];
+	
+	l2->tamanho = l1->tamanho;	
+	
+	return 1;
+}
+
 /***********/
 /*BubbleSort*/
 /***********/

@@ -1,4 +1,3 @@
-#define TAM 100001
 
 typedef int elem;
 
@@ -13,6 +12,7 @@ void cria(lista *l, long TAM);
 void destroi(lista *l);
 int insere(lista *l, elem e);
 void imprime(lista *l);
+int copia(lista *l1, lista *l2);
 
 void ordena_bubble_sort(lista *l);
 void ordena_quick_sort(lista *l);

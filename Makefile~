@@ -1,0 +1,5 @@
+all:
+	gcc main.c ordena_lista.c -o ordena -lm -Wall
+run:
+	./ordena < Inputs/random_power1.txt Inputs/random_power2.txt
+ 

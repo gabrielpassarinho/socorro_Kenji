@@ -8,7 +8,10 @@
 
 int main(void){
 	/*Declarando variáveis*/
-	lista* L = malloc(sizeof(lista));
+	lista* L1 = malloc(sizeof(lista));
+	lista* L2 = malloc(sizeof(lista));
+	lista* L3 = malloc(sizeof(lista));
+	lista* L4 = malloc(sizeof(lista));
 	elem aux;
 	int i, j, k;
 	long n;
@@ -22,35 +25,44 @@ int main(void){
 		n = pow(10, k);
 		
 		/*Inicia a Lista*/
-		cria(L, n);
+		cria(L1, n);
+		cria(L2, n);
+		cria(L3, n);
+		cria(L4, n);
 
 		for(i=0;i<n;i++){
 			scanf("%d", &aux);
-			insere(L, aux);
+			insere(L1, aux);
 		}
-
+		copia(L1, L2);
+		copia(L1, L3);
+		copia(L1, L4);
+		
 		//printf("Antes do sort\n")
 		//imprime(L);
-		media_tempos_hs[k], media_tempos_bs[k], media_tempos_qs[k], media_tempos_rs[k] = 0;
+		media_tempos_hs[k] = 0;
+		media_tempos_bs[k] = 0;
+		media_tempos_qs[k] = 0;
+		media_tempos_rs[k] = 0;
 		for(j = 1;  j <= 10; j++){
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_heap_sort(L);
+			ordena_heap_sort(L1);
 			media_tempos_hs[k] += clock() - tempo_ini;
 			
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_bubble_sort(L);
+			ordena_bubble_sort(L2);
 			media_tempos_bs[k] += clock() - tempo_ini;
 			
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_quick_sort(L);
+			ordena_quick_sort(L3);
 			media_tempos_qs[k] += clock() - tempo_ini;
 			
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_radix_sort(L);
+			ordena_radix_sort(L4);
 			media_tempos_rs[k] += clock() - tempo_ini;
 		}
 		
@@ -58,25 +70,28 @@ int main(void){
 		media_tempos_bs[k] = media_tempos_bs[k]/10;
 		media_tempos_qs[k] = media_tempos_qs[k]/10;
 		media_tempos_rs[k] = media_tempos_rs[k]/10;
+		
+		printf("Terminei uma rodada\n");
 	}
 
-	printf("\nTempo total de cada algoritmo nas entradas de tamanho: %ld\n", n);
+	printf("\nTempo total de cada\n");
 	printf("HeapSort:");
 	for(k = 0; k <= total_entradas -1; k++)
-		printf("  %lf  ", (double) media_tempos_hs[k]/CLOCK_PER_SEC);
+		printf("  %lf  ", (double) media_tempos_hs[k]/CLOCKS_PER_SEC);
 	
 	printf("\nBubbleSort:");
 	for(k = 0; k <= total_entradas -1; k++)
-		printf("  %lf  ", (double) media_tempos_bs[k]/CLOCK_PER_SEC);
+		printf("  %lf  ", (double) media_tempos_bs[k]/CLOCKS_PER_SEC);
 	
 	printf("\nQuickSort:");
 	for(k = 0; k <= total_entradas -1; k++)
-		printf("  %lf  ", (double) media_tempos_qs[k]/CLOCK_PER_SEC);
+		printf("  %lf  ", (double) media_tempos_qs[k]/CLOCKS_PER_SEC);
 	
 	printf("\nRadixSort:");
 	for(k = 0; k <= total_entradas -1; k++)
-		printf("  %lf  ", (double) media_tempos_rs[k]/CLOCK_PER_SEC);
+		printf("  %lf  ", (double) media_tempos_rs[k]/CLOCKS_PER_SEC);
 	
-	
+	printf("\n");
+		
 	return 0;
-	}
+}
