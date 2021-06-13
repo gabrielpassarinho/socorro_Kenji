@@ -8,11 +8,9 @@
 
 int main(void){
 	/*Declarando variáveis*/
+	lista* L_aux = malloc(sizeof(lista));
 	lista* L = malloc(sizeof(lista));
-	lista* L1 = malloc(sizeof(lista));
-	lista* L2 = malloc(sizeof(lista));
-	lista* L3 = malloc(sizeof(lista));
-	lista* L4 = malloc(sizeof(lista));
+	
 	elem aux;
 	int i, j, k;
 	long n;
@@ -23,18 +21,15 @@ int main(void){
 	clock_t media_tempos_rs[total_entradas];
 	
 	/*Inicia a Lista*/
+	cria(L_aux, (long) pow(10, total_entradas));
 	cria(L, (long) pow(10, total_entradas));
-	cria(L1, (long) pow(10, total_entradas));
-	cria(L2, (long) pow(10, total_entradas));
-	cria(L3, (long) pow(10, total_entradas));
-	cria(L4, (long) pow(10, total_entradas));
-
+	
 	for(k = 1; k <= total_entradas; k++){
 		n = pow(10, k);
 
 		for(i=0;i<n;i++){
 			scanf("%d", &aux);
-			insere(L, aux);
+			insere(L_aux, aux);
 		}
 		
 		//printf("Antes do sort\n")
@@ -44,38 +39,29 @@ int main(void){
 		media_tempos_qs[k] = 0;
 		media_tempos_rs[k] = 0;
 		for(j = 1;  j <= 10; j++){
-			copia(L, L1);
-			copia(L, L2);
-			copia(L, L3);
-			copia(L, L4);
-			
-			//imprime(L1);
+			copia(L_aux, L);
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_heap_sort(L1);
+			ordena_heap_sort(L);
 			media_tempos_hs[k] += clock() - tempo_ini;
-			//imprime(L1);
 			
-			//imprime(L2);
+			copia(L_aux, L);
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_bubble_sort(L2);
+			ordena_bubble_sort(L);
 			media_tempos_bs[k] += clock() - tempo_ini;
-			//imprime(L2);
 			
-			//imprime(L3);
+			copia(L_aux, L);
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_quick_sort(L3);
+			ordena_quick_sort(L);
 			media_tempos_qs[k] += clock() - tempo_ini;
-			//imprime(L3);
 			
-			//imprime(L4);
+			copia(L_aux, L);
 			tempo_ini = clock();
 			/*Código que deve ser medido o tempo*/
-			ordena_radix_sort(L4);
+			ordena_radix_sort(L);
 			media_tempos_rs[k] += clock() - tempo_ini;
-			//imprime(L4);
 		}
 		
 		media_tempos_hs[k] = media_tempos_hs[k]/10; 
