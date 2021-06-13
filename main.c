@@ -20,15 +20,15 @@ int main(void){
 	clock_t media_tempos_bs[total_entradas]; 
 	clock_t media_tempos_qs[total_entradas]; 
 	clock_t media_tempos_rs[total_entradas];
+	
+	/*Inicia a Lista*/
+	cria(L1, pow(10, total_entradas));
+	cria(L2, pow(10, total_entradas));
+	cria(L3, pow(10, total_entradas));
+	cria(L4, pow(10, total_entradas));
 
 	for(k = 1; k <= total_entradas; k++){
 		n = pow(10, k);
-		
-		/*Inicia a Lista*/
-		cria(L1, n);
-		cria(L2, n);
-		cria(L3, n);
-		cria(L4, n);
 
 		for(i=0;i<n;i++){
 			scanf("%d", &aux);
@@ -72,6 +72,11 @@ int main(void){
 		media_tempos_rs[k] = media_tempos_rs[k]/10;
 		
 		printf("Terminei uma rodada\n");
+		
+		limpa(L1);
+		limpa(L2);
+		limpa(L3);
+		limpa(L4);
 	}
 
 	printf("\nTempo total de cada\n");

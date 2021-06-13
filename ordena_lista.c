@@ -28,6 +28,12 @@ int insere(lista *l, elem e){
 		return 0; // lista cheia
 }
 
+void limpa(lista *l){
+	l->tamanho = 0;
+	
+	return;
+}
+
 void imprime(lista *l){
 	long i;
     if (l->tamanho == 0)  
