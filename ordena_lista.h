@@ -5,9 +5,11 @@ typedef int elem;
 typedef struct {
    elem *elementos;
    long tamanho;
+   long TAM_MAX;
+   
 } lista;
 
-void cria(lista *l);
+void cria(lista *l, long TAM);
 void destroi(lista *l);
 int insere(lista *l, elem e);
 void imprime(lista *l);
