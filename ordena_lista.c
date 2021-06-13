@@ -52,7 +52,7 @@ int copia(lista *l1, lista *l2){
 	if(l2->TAM_MAX !=  l1->TAM_MAX)
 		return 0;
 	
-	for(int i = 0; i <= l1->tamanho; i++)
+	for(long i = 0; i <= l1->tamanho; i++)
 		l2->elementos[i] = l1->elementos[i];
 	
 	l2->tamanho = l1->tamanho;	
@@ -66,7 +66,8 @@ int copia(lista *l1, lista *l2){
 
 void ordena_bubble_sort(lista *l) {
 	int ordenado = 0; // se ordenado == 1, vetor estah ordenado; 0, c.c.
-	int i, j, aux = 0;
+	long i, j;
+	elem aux = 0;
 
 	for(i = 0; i <= l->tamanho-1 && ordenado == 0; i++){ //enquanto nao chegarmos ao fum do vetor, e enquanto nosso vetor nao estiver ordenado
 		ordenado = 1;

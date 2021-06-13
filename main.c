@@ -22,10 +22,10 @@ int main(void){
 	clock_t media_tempos_rs[total_entradas];
 	
 	/*Inicia a Lista*/
-	cria(L1, pow(10, total_entradas));
-	cria(L2, pow(10, total_entradas));
-	cria(L3, pow(10, total_entradas));
-	cria(L4, pow(10, total_entradas));
+	cria(L1, (long) pow(10, total_entradas));
+	cria(L2, (long) pow(10, total_entradas));
+	cria(L3, (long) pow(10, total_entradas));
+	cria(L4, (long) pow(10, total_entradas));
 
 	for(k = 1; k <= total_entradas; k++){
 		n = pow(10, k);
