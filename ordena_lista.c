@@ -17,7 +17,7 @@ void destroi(lista *l){
     l->tamanho = 0;
     
     return;
-};
+}
 
 int insere(lista *l, elem e){
 	if (l->tamanho <= l->TAM_MAX - 1) {
