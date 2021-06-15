@@ -4,7 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include <stdlib.h>
-#define total_entradas 3
+#define total_entradas 5
 
 int main(void){
 	/*Declarando variáveis*/
