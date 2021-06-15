@@ -19,6 +19,38 @@ void destroi(lista *l){
     return;
 }
 
+void preenche(lista *l, long TAM, int c){
+	if(TAM > l->TAM_MAX)
+		return;
+	
+	if(c == 0){ // aleatorio
+		int auxilia_troca;
+		int posicao_embaralhada;
+		
+		for(long i = 0; i <= TAM - 1; i++)
+			l->elementos[i] = i;
+		
+		for(long i = 0; i <= TAM - 1; i++){
+			auxilia_troca = l->elementos[i];
+			posicao_embaralhada = rand();
+			posicao_embaralhada = posicao_embaralhada % TAM;
+			l->elementos[i] = l->elementos[posicao_embaralhada];
+			l->elementos[posicao_embaralhada] = auxilia_troca;
+		}
+	} else if (c == 1){
+		for(long i = 0; i <= TAM - 1; i++)
+			l->elementos[i] = i;
+	} else if (c == -1){
+		for(long i = 0; i <= TAM - 1; i++)
+			l->elementos[l->TAM_MAX - 1 - i] = i;
+	}
+	
+	l->tamanho = TAM;
+	
+	return;
+}
+
+
 int insere(lista *l, elem e){
 	if (l->tamanho <= l->TAM_MAX - 1) {
 		l->elementos[l->tamanho] = e;
@@ -40,7 +72,7 @@ void imprime(lista *l){
         printf("( )\n"); //lista vazia
     else {
     	printf("(");
-        if(l->tamanho > 50){
+        if(l->tamanho > 20){
         	for (i = 0; i < 10; i++){
             	printf("%d, ", l->elementos[i]);
             }	
@@ -60,7 +92,7 @@ void imprime(lista *l){
 	return;
 }
 
-int copia(lista *l1, lista *l2){
+int copia(lista *l1, lista *l2){ // l2 recebe l1
 	if(l2->TAM_MAX !=  l1->TAM_MAX)
 		return 0;
 	

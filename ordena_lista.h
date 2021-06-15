@@ -12,7 +12,8 @@ void cria(lista *l, long TAM);
 void destroi(lista *l);
 int insere(lista *l, elem e);
 void imprime(lista *l);
-int copia(lista *l1, lista *l2);
+int copia(lista *l1, lista *l2); // l2 recebe l1
+void preenche(lista *l, long TAM, int c); // c == 0 para preencher randomicamente; c == -1, decrescente; c == 1, crescente
 void limpa(lista *l);
 
 void ordena_bubble_sort(lista *l);
