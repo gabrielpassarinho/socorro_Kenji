@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\title{%
+    1º Projeto da disciplina Estruturas de Dados II \\
+     \large Análise assintótica de algoritmos de ordenação}
+\author{Gabriel Passarelli 11218480\\ Marcelo Kenji Noda --------}
+\date{2021}
+
+\begin{document}
+%
+\maketitle
+%
+\newpage
+\section{Introdução}
+Nosso objetivo com este texto é analisar a complexidade de tempo de cinco algoritmos de ordenação distintos, implementados na parte prática do projeto em linguagem C de programação seguindo os pseudo-códigos fornecidos na proposta do trabalho.\par
+%
+Em cada seção, fazemos a análise de maneira teórica do pseudo-código de um algoritmo, dando ênfase para o comportamento assintótico da complexidade de tempo, e em seguida apresentamos os resultados obtidos a partir das medições de tempo feitas rodando os códigos implementados. Nessa parte, incluímos gráficos e tabelas para facilitar a visualização dos dados.
+%
+\section{Análise dos algoritmos}
+\subsection{Bubblesort (versão otimizada)}
+O procedimento de ordenação do Bubblesort tem por base comparar elementos adjacentes, e invertê-los, caso o último seja menor do que o primeiro. Paramos de percorrer o vetor comparando as posições contíguas se não houverem mais trocas a serem realizadas (e isso distingue o Bubblesort otimizado do normal). Fato é que a cada laço em que se torna a percorrer o vetor, não caminhamos até seu fim, mas sim até uma posição antes à que foi atingida no laço anterior. De fato, não é necessário ir até o fim, já que após $i$ rodadas os $i$ maiores elementos estarão ocupando as posições corretas no vetor.\par
+%
+De modo mais preciso, vemos no pseudo-código da rotina Optimized_Bubble_Sort que, no pior caso, dado um vetor de tamano $n \in \mathbb{N}$ o número de operações será $n$ vezes o custo do for da linha $4$. Este, por sua vez, realizará aproximadamente 
+\[\sum_{i = 0}^{i = n-1}6*(n-i-2) = \] 
+operações em seu interior (a operação de troca normalmente se utiliza de uma variável auxiliar, de modo que o custo dela se torna o custo de 3 atribuições). Ou seja, temos um custo total, no pior caso, $O(n^2).$\par
+O pior caso caso acontece somente quando o vetor está ordenado de maneira crescente. Tomando um vetor aleatório podemos obter o caso médio. Nessa situação
+\subsection{Quicksort}
+\subsection{Radixesort}
+\subsection{Heapsort}
+\end{document}
