@@ -39,10 +39,22 @@ void imprime(lista *l){
     if (l->tamanho == 0)  
         printf("( )\n"); //lista vazia
     else {
-        printf("(");
-        for (i = 0; i < l->tamanho-1; i++)
-            printf("%d, ", l->elementos[i]);
-        printf("%d)\n", l->elementos[i]);
+    	printf("(");
+        if(l->tamanho > 50){
+        	for (i = 0; i < 10; i++){
+            	printf("%d, ", l->elementos[i]);
+            }	
+            printf("..., ");
+            
+            for (i = l->tamanho - 10; i < l->tamanho - 1; i++){
+            	printf("%d, ", l->elementos[i]);
+            }
+        	printf("%d)\n", l->elementos[i]);
+    	} else{
+    		for (i = 0; i < l->tamanho-1; i++)
+            	printf("%d, ", l->elementos[i]);
+        	printf("%d)\n", l->elementos[i]);
+		}
     }
 
 	return;

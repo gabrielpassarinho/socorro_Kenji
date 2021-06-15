@@ -6,3 +6,7 @@ run_ordenado_decrescente:
 	./ordena < Inputs/descending1.txt Inputs/descending2.txt Inputs/descending3.txt Inputs/descending4.txt Inputs/descending5.txt
 run_ordenado_crescente:
 	./ordena < Inputs/ordered1.txt Inputs/ordered2.txt Inputs/ordered3.txt Inputs/ordered4.txt Inputs/ordered5.txt
+
+run_debugging:
+	./ordena < Inputs/random_power5.txt
+
