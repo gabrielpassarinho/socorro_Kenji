@@ -33,7 +33,7 @@ int main(void){
 	for(i = 0; i <= 2; i++ ){
 		for(k = 1; k <= total_entradas; k++){
 			n = pow(10, k);
-			for(j = 1;  j <= 1; j++){
+			for(j = 1;  j <= 10; j++){
 				preenche(L, n, c);
 				tempo_ini = clock();
 				ordena_heap_sort(L);
@@ -53,6 +53,7 @@ int main(void){
 				tempo_ini = clock();
 				ordena_radix_sort(L);
 				media_tempos_rs[i][k - 1] += clock() - tempo_ini;
+				//printf("\nterminei, j = %d\n", j);
 			}
 		}
 		
@@ -88,29 +89,29 @@ int main(void){
 		
 	return 0;
 }
-
-/* 
+/*
+int main(){
 	// run_debugging
 	lista* L = malloc(sizeof(lista));
-	lista* L_aux = malloc(sizeof(lista));
-	elem aux;
 	
-	cria(L_aux, (long) pow(10, 5));
 	cria(L, (long) pow(10, 5));
+	preenche(L,  (long) pow(10, 5), 0);
 	
-	for(int i=0;i<100000;i++){
-			scanf("%d", &aux);
-			insere(L_aux, aux);
-	}
 	imprime(L);
+	
 	clock_t tempo_ini;
 	clock_t media = 0;
 	for(int j = 0; j < 10; j++){
-		copia(L_aux, L);
+		preenche(L,  (long) pow(10, 5), 0);
 		tempo_ini = clock();
-		ordena_quick_sort(L);
+		ordena_bubble_sort(L);
 		media += clock() - tempo_ini;
 	}
+	
 	imprime(L);
-	printf("  %lf  \n", (media/(double) 10)/CLOCKS_PER_SEC);*/
-
+	
+	printf("  %lf  \n", (media/(double) 10)/CLOCKS_PER_SEC);
+	
+	return 0;	
+}
+*/

@@ -25,10 +25,34 @@ Em cada seção, fazemos a análise de maneira teórica do pseudo-código de um 
 \subsection{Bubblesort (versão otimizada)}
 O procedimento de ordenação do Bubblesort tem por base comparar elementos adjacentes, e invertê-los, caso o último seja menor do que o primeiro. Paramos de percorrer o vetor comparando as posições contíguas se não houverem mais trocas a serem realizadas (e isso distingue o Bubblesort otimizado do normal). Fato é que a cada laço em que se torna a percorrer o vetor, não caminhamos até seu fim, mas sim até uma posição antes à que foi atingida no laço anterior. De fato, não é necessário ir até o fim, já que após $i$ rodadas os $i$ maiores elementos estarão ocupando as posições corretas no vetor.\par
 %
-De modo mais preciso, vemos no pseudo-código da rotina Optimized_Bubble_Sort que, no pior caso, dado um vetor de tamano $n \in \mathbb{N}$ o número de operações será $n$ vezes o custo do for da linha $4$. Este, por sua vez, realizará aproximadamente 
-\[\sum_{i = 0}^{i = n-1}6*(n-i-2) = \] 
-operações em seu interior (a operação de troca normalmente se utiliza de uma variável auxiliar, de modo que o custo dela se torna o custo de 3 atribuições). Ou seja, temos um custo total, no pior caso, $O(n^2).$\par
-O pior caso caso acontece somente quando o vetor está ordenado de maneira crescente. Tomando um vetor aleatório podemos obter o caso médio. Nessa situação
+De modo mais preciso, vemos no pseudo-código da rotina Optimized\_Bubble\_Sort que, no pior caso, dado um vetor de tamano $n \in \mathbb{N}$ o número de operações será $n$ vezes o custo do for da linha $4$. Este, por sua vez, realizará aproximadamente 
+\[\sum_{i = 0}^{i = n-1}6\cdot(n-i-2) = 3(n - 3)n\] operações em seu interior (a operação de troca normalmente se utiliza de uma variável auxiliar, de modo que o custo dela se torna o custo de 3 atribuições). Ou seja, temos um custo total, no pior caso, $O(n^2)$.\par
+O pior caso caso acontece somente quando o vetor está ordenado de maneira decrescente. Tomando um vetor aleatório podemos obter o caso médio. Nessa situação, a probabilidade de que uma elemento esteja ocupando uma dada posição no vetor no começo é $1/n$. Além disso, se ele está deslocado $j$ posições de sua posição correta, então precisaremos realizar pelo menos $j$ trocas para acertá-la. A questão que precisamos responder então é: em média, quantas posições um elemento está deslocado de sua posição correta? Seja $X_k$, a variável aleatória que mede a distância de um elementos a sua posição correta, quando está é $k$. Temos \[E[X_k] = \sum_{i = 0}^{k-1}\frac{(k-i)}{n}+\sum_{i = k+1}^{n}\frac{(i - k)}{n} = \frac{n+k^{2}+(n-k)^{2}}{2n},\] logo, em um vetor de tamanho $n$, realizaremos \[\sum_{i=0}^{n}E[X_k] = \sum_{i=0}^{n}\frac{n+k^{2}+(n-k)^{2}}{2n} = \frac{(n+1)(n+2)}{3×} = O(n^2)\] permutações.\par
+%
+Nossas medições de tempo confirmam nossas análises téoricas, como bem se vê pela inclinação das retas do gráfico que segue
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{bubble_sort.png}
+    \caption{Os números na frente das legendas indicam as inclinações das respectivas retas. Como esperado, os gráficos para entradas aleatórias e ordenadas de modo decrescente aprenentam comportamento próximo ao quadrático, enquanto entradas já ordenadas têm comportamento próximo ao linear.}
+\end{figure}
+%
+\begin{table}[h]
+    \begin{tabular}{c|c|c|c|c|c}
+        n = & $10^{1}$ & $10^{2}$ & $10^{3}$ & $10^{4}$ & $10^{5}$ \\ 
+        \hline
+        Vetor aleatório & $4\cdot 10^{-6}$ & $1.15\cdot 10^{-4}$ & $5.28\cdot 10^{-3}$ & $5.47\cdot 10^{-1}$ & $61.04$ \\
+        \hline
+        Vetor crescente & $10^{-6}$ & $10^{-6}$ & $5\cdot 10^{-6}$ & $5.1\cdot 10^{-5}$ & $4.61\cdot 10^{-4}$\\
+        \hline
+        Vetor decrescente & $10^{-6}$ & $10^{-6}$ & $6\cdot 10^{-6}$ & $5\cdot 10^{-5}$ & $52.17$\\
+        \hline
+        Média & $2\cdot 10^{-6}$ & $3.9\cdot 10^{-5}$ & $1.76\cdot 10^{-3}$ & $1.82\cdot 10^{-1}$ & $37.7$ \\
+        \hline
+        Desvio Padrão & $1.41\cdot 10^{-6}$ & $5.37\cdot 10^{-5}$ & $2.49\cdot 10^{-3}$ & $2.58\cdot 10^{-1}$ & $26.92$ \\
+    \end{tabular}
+    \caption{Medidas de tempo para o Bubblesort  segundos}
+    \label{tabela_casos_diarios_MMQ}
+\end{table}
 \subsection{Quicksort}
 \subsection{Radixesort}
 \subsection{Heapsort}
