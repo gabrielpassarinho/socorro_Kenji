@@ -30,6 +30,7 @@ De modo mais preciso, vemos no pseudo-código da rotina Optimized\_Bubble\_Sort 
 O pior caso caso acontece somente quando o vetor está ordenado de maneira decrescente. Tomando um vetor aleatório podemos obter o caso médio. Nessa situação, a probabilidade de que uma elemento esteja ocupando uma dada posição no vetor no começo é $1/n$. Além disso, se ele está deslocado $j$ posições de sua posição correta, então precisaremos realizar pelo menos $j$ trocas para acertá-la. A questão que precisamos responder então é: em média, quantas posições um elemento está deslocado de sua posição correta? Seja $X_k$, a variável aleatória que mede a distância de um elementos a sua posição correta, quando está é $k$. Temos \[E[X_k] = \sum_{i = 0}^{k-1}\frac{(k-i)}{n}+\sum_{i = k+1}^{n}\frac{(i - k)}{n} = \frac{n+k^{2}+(n-k)^{2}}{2n},\] logo, em um vetor de tamanho $n$, realizaremos \[\sum_{i=0}^{n}E[X_k] = \sum_{i=0}^{n}\frac{n+k^{2}+(n-k)^{2}}{2n} = \frac{(n+1)(n+2)}{3×} = O(n^2)\] permutações.\par
 %
 Nossas medições de tempo confirmam nossas análises téoricas, como bem se vê pela inclinação das retas do gráfico que segue
+%
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{bubble_sort.png}
