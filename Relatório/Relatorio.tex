@@ -39,7 +39,7 @@ Nossas medições de tempo confirmam nossas análises teóricas, como bem se vê
         \hline
         Vetor crescente & $10^{-6}$ & $10^{-6}$ & $5\cdot 10^{-6}$ & $5.1\cdot 10^{-5}$ & $4.61\cdot 10^{-4}$\\
         \hline
-        Vetor decrescente & $10^{-6}$ & $10^{-6}$ & $6\cdot 10^{-6}$ & $5\cdot 10^{-5}$ & $52.17$\\
+        Vetor decrescente & $2\cdot10^{-6}$ & $8.8\cdto10^{-5}$ & $7.3\cdot 10^{-3}$ & $5.3\cdot 10^{-1}$ & $52.12$\\
         \hline
         Média & $2\cdot 10^{-6}$ & $3.9\cdot 10^{-5}$ & $1.76\cdot 10^{-3}$ & $1.82\cdot 10^{-1}$ & $37.7$ \\
         \hline
@@ -83,6 +83,7 @@ O Heapsort é um algoritmo que se aproveita da estrutura de uma árvore binária
 %
 O método Heapfy determina a posição correta de um nó i. Inicialmente, determina-se qual dos nós filhos de i é o maior, e em seguida verifica-se se o valor do nó i é menor do que o do seu maior filho. Se sim, a posição dos dois é trocada, e o método é chamado recursimavente. Se não, siginifica que a rotina terminou. No pior caso, a subárvore do maior nó filho de i conterá $2/3$ do número de nós no total (isso acontece quando a última linha da árvore está preenchida até a metade). Assim, se $T(n)$ é a complexidade do método Heapfy em uma árvore de tamanho n, então \[T(n) = T(2/3n) + c.\]
 A solução dessa recursão é $T(n) = c \cdot \log_{2/3}n = O(\ln n).$\par
-Evidentemente, o vetor $A$ que passamos para o método Heapsort não necessariamente está na forma de uma heap, e por isso o procedimento começa com a iteração da linha 2. Essa iteração percorre o último penúltimo nível da árvore, fazendo com que cada nó desta seja a raiz de uma heap. Em seguida, vamos para o antepenúltimo nível da árvore, e garantimos novamente que todos os nós desse nível sejam raízes de uma heap, e assim por diante.\par
+Evidentemente, apesar de podermos interpretar o vetor $A$, que passamos para o método Heapsort, como uma árvore, ela não necessariamente estará na forma de uma heap, e por isso o procedimento começa com a iteração da linha 2. Essa iteração percorre o penúltimo nível da árvore, fazendo com que cada nó desta seja a raiz de uma heap. Em seguida, vamos para o antepenúltimo nível da árvore, e garantimos novamente que todos os nós desse nível sejam raízes de uma heap, e assim por diante.\par
 Na linha 6, inician-se o processo de ordenação da heap, como descrito anteriormente. Pela nossa análise da rotina Heapfy, temos um custo total no pior caso então de \[\left[\frac{n}{2}\cdot(2+O(\ln n)) + 1\right]+ \left[n(3 + O(\ln n) + 3) + 1\right] = O(n\cdot \ln n)\]
+Como se vê claramente pelas medições de tempo contidas na tabela, a complexidade de tempo do HeapSort não se altera de maneira relevamente conforme o nível de ordenação prévia da entrada.
 \end{document}
