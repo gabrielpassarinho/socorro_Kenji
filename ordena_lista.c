@@ -42,7 +42,7 @@ void preenche(lista *l, long TAM, int c){
 			l->elementos[i] = i;
 	} else if (c == -1){
 		for(long i = 0; i <= TAM - 1; i++)
-			l->elementos[l->TAM_MAX - 1 - i] = i;
+			l->elementos[TAM - 1 - i] = i;
 	}
 	
 	l->tamanho = TAM;

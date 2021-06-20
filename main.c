@@ -7,7 +7,7 @@
 #define total_entradas 5
 
 int main(void){
-	/*Declarando variáveis*/
+	//Declarando variáveis
 	lista* L = malloc(sizeof(lista));
 	int i, j, k;
 	long n;
@@ -17,7 +17,7 @@ int main(void){
 	clock_t media_tempos_qs[3][total_entradas]; 
 	clock_t media_tempos_rs[3][total_entradas];
 	
-	/*Inicia a Lista*/
+	//Inicia a Lista
 	cria(L, (long) pow(10, total_entradas));
 	
 	for(i = 0; i<= 2; i++)
@@ -89,20 +89,21 @@ int main(void){
 		
 	return 0;
 }
+
+
 /*
 int main(){
 	// run_debugging
 	lista* L = malloc(sizeof(lista));
 	
 	cria(L, (long) pow(10, 5));
-	preenche(L,  (long) pow(10, 5), 0);
+	preenche(L,  (long) pow(10, 4), -1);
 	
 	imprime(L);
 	
 	clock_t tempo_ini;
 	clock_t media = 0;
 	for(int j = 0; j < 10; j++){
-		preenche(L,  (long) pow(10, 5), 0);
 		tempo_ini = clock();
 		ordena_bubble_sort(L);
 		media += clock() - tempo_ini;
@@ -113,5 +114,5 @@ int main(){
 	printf("  %lf  \n", (media/(double) 10)/CLOCKS_PER_SEC);
 	
 	return 0;	
-}
-*/
+}*/
+

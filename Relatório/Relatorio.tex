@@ -23,19 +23,13 @@ Em cada seção, fazemos a análise de maneira teórica do pseudo-código de um 
 %
 \section{Análise dos algoritmos}
 \subsection{Bubble Sort (versão otimizada)}
-O procedimento de ordenação do Bubblesort tem por base comparar elementos adjacentes, e invertê-los, caso o último seja menor do que o primeiro. Paramos de percorrer o vetor comparando as posições contíguas se não houverem mais trocas a serem realizadas (e isso distingue o Bubblesort otimizado do normal). Fato é que a cada laço em que se torna a percorrer o vetor, não caminhamos até seu fim, mas sim até uma posição antes à que foi atingida no laço anterior. De fato, não é necessário ir até o fim, já que após $i$ rodadas os $i$ maiores elementos estarão ocupando as posições corretas no vetor.\par
+O procedimento de ordenação do Bubblesort tem por base comparar elementos adjacentes e invertê-los caso eles estejam desordenados. Percorremos iterativamente o vetor realizando as comparações e as inversões (quando necessárias), e, se percorrermos o vetor sem realizar nenhuma troca, então a rotina termina (e isso distingue o Bubblesort otimizado do normal). Fato é que não caminhamos até o fim do vetor em todo laço, mas sim até uma posição anterior à última que foi atingida no laço anterior, pois, após $i$ rodadas, os $i$ maiores elementos já estarão em suas posições corretas.\par
 %
 De modo mais preciso, vemos no pseudo-código da rotina Optimized\_Bubble\_Sort que, no pior caso, dado um vetor de tamano $n \in \mathbb{N}$ o número de operações será $n$ vezes o custo do for da linha $4$. Este, por sua vez, realizará aproximadamente 
 \[\sum_{i = 0}^{i = n-1}6\cdot(n-i-2) = 3(n - 3)n\] operações em seu interior (a operação de troca normalmente se utiliza de uma variável auxiliar, de modo que o custo dela se torna o custo de 3 atribuições). Ou seja, temos um custo total, no pior caso, $O(n^2)$.\par
-O pior caso caso acontece somente quando o vetor está ordenado de maneira decrescente. Tomando um vetor aleatório podemos obter o caso médio. Nessa situação, a probabilidade de que uma elemento esteja ocupando uma dada posição no vetor no começo é $1/n$. Além disso, se ele está deslocado $j$ posições de sua posição correta, então precisaremos realizar pelo menos $j$ trocas para acertá-la. A questão que precisamos responder então é: em média, quantas posições um elemento está deslocado de sua posição correta? Seja $X_k$, a variável aleatória que mede a distância de um elementos a sua posição correta, quando está é $k$. Temos \[E[X_k] = \sum_{i = 0}^{k-1}\frac{(k-i)}{n}+\sum_{i = k+1}^{n}\frac{(i - k)}{n} = \frac{n+k^{2}+(n-k)^{2}}{2n},\] logo, em um vetor de tamanho $n$, realizaremos \[\sum_{i=0}^{n}E[X_k] = \sum_{i=0}^{n}\frac{n+k^{2}+(n-k)^{2}}{2n} = \frac{(n+1)(n+2)}{3×} = O(n^2)\] permutações.\par
+O pior caso caso acontece somente quando o vetor está ordenado de maneira decrescente. Tomando um vetor aleatório podemos obter o caso médio. Nessa situação, a probabilidade de que um elemento esteja ocupando uma dada posição no vetor é $1/n$. Perceba que, se esse elemento está deslocado $j$ posições de sua posição correta, então precisaremos realizar pelo menos $j$ trocas para acertá-la. Assim, a questão que precisamos responder então é: em média, quantas posições um elemento está deslocado de sua posição correta? Seja $X_k$, a variável aleatória que mede a distância de um elementos a sua posição correta, quando está é $k$. Temos \[E[X_k] = \sum_{i = 0}^{k-1}\frac{(k-i)}{n}+\sum_{i = k+1}^{n}\frac{(i - k)}{n} = \frac{n+k^{2}+(n-k)^{2}}{2n},\] logo, em um vetor de tamanho $n$, realizaremos \[\sum_{k=0}^{n}E[X_k] = \sum_{k=0}^{n}\frac{n+k^{2}+(n-k)^{2}}{2n} = \frac{(n+1)(n+2)}{3×} = O(n^2)\] permutações.\par
 %
-Nossas medições de tempo confirmam nossas análises téoricas, como bem se vê pela inclinação das retas do gráfico que segue
-%
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{bubble_sort.png}
-    \caption{Os números na frente das legendas indicam as inclinações das respectivas retas. Como esperado, os gráficos para entradas aleatórias e ordenadas de modo decrescente aprenentam comportamento próximo ao quadrático, enquanto entradas já ordenadas têm comportamento próximo ao linear.}
-\end{figure}
+Nossas medições de tempo confirmam nossas análises teóricas, como bem se vê pela inclinação das retas do gráfico que compara os quatro algoritmos, inserido no final do relatório.
 %
 \begin{table}[h]
     \begin{tabular}{c|c|c|c|c|c}
@@ -53,23 +47,17 @@ Nossas medições de tempo confirmam nossas análises téoricas, como bem se vê
     \end{tabular}
     \caption{Medidas de tempo para o Bubblesort em segundos}
 \end{table}\par
-Observando a tabela, podemos notar como o desvio padrão cresceu junto com o aumento do tamanho da entrada. Isso reforça nossa avaliação de que a complexidade do BubbleSort está altamente relacionada ao número de elementos ocupando suas posições corretas previamente.
+Além disso, observando a tabela, podemos notar como o desvio padrão entre as medições de tempo em cada tipo de entrada cresceu junto com o aumento do tamanho da entrada. Isso reforça nossa avaliação de que a complexidade do BubbleSort está altamente relacionada ao número de elementos já ordenados no vetor inicial.
 \subsection{Quick Sort}
 Pique Pique, tchururu
 \subsection{Radix Sort}
-A ideia básica por trás do Radixsort é ordenar nossos inteiros de modo recursivo, usando como chave de ordenação uma casa decimal diferente a cada chamada. Além disso, comeaçamos pelo dígito menos significativo e terminamos no dígito mais significativo. Cabe dizer também que é claro que nossas entradas não precisam ser inteiros: datas também funcionariam, por exemplo, ou qualquer outro dado que pudesse ser interpretado como uma sequência de caracteres com uma relação de ordem entre si.\par
+A ideia básica por trás do Radixsort é ordenar nossos inteiros de modo recursivo, usando como chave de ordenação uma casa decimal diferente a cada chamada. Comeaçamos pelo dígito menos significativo e terminamos no dígito mais significativo. Cabe dizer que nossas entradas não precisam ser inteiros: datas também funcionariam, ou qualquer outro dado que pudesse ser interpretado como uma sequência de caracteres com uma relação de ordem entre si.\par
 %
-No pseudo-código, começamos com um vetor $A$ de tamanho $n$. A codição $(maior/posicao)>0$ é, pelo que dissemos acima, a condição de parada do processo de ordenação: $A$ está ordenado quando $posicao$ tiver mais dígitos do que o maior elementos de $A$. Usamos a rotina Counting\_Sort como auxiliar. Ela é responsável por ordenar o vetor $A$ considerando apenas a casa decimal das entradas do vetor dada pela fórmula $\log_{10} posicao$. Note que, portanto, o $enquanto$ da linha 4 do peseudo-código rodará um número de vezes igual ao número de dígitos do maior elemento contido em $A$.\par
+No pseudo-código, começamos com um vetor $A$ de tamanho $n$. A codição $(maior/posicao)>0$ é a condição de parada do processo de ordenação: $A$ está ordenado quando $posicao$ tiver mais dígitos do que o maior elementos de $A$. Usamos a rotina Counting\_Sort como auxiliar. Ela é responsável por ordenar o vetor $A$ considerando apenas a casa decimal das entradas do vetor de número dado pela fórmula $\log_{10} posicao$. Note que, portanto, o $enquanto$ da linha 4 do peseudo-código rodará um número de vezes igual ao número de dígitos do maior elemento contido em $A$.\par
 %
-A rotina Counting\_Sort tem como lógica inferir a posição correta de um dado elemento $a$ de $A$ através da contagem de quantos elementos menores do que $a$ existem em $A$, e é exatamente essa a informação que $B$ guarda: na primeira iteração, contamos quantos elementos de $A$ possuem o dígito especificado pela variável $posicao$ igual a $i$; no segundo laço de iterações contamos também quantos elementos com o dito dígito menor do que $i$ existem em $A$, e salvamos essa informação em $B[i]$. Assim, é evidente que o número correto da posição de $A[i]$ será exatamente $B[chave] - 1$, em que $chave$ é o dígito considerado na chamada atual. Note que a cada iteração, decrementa-se o valor guardado em $B[chave]$, de modo a não se perder os elementos de $A$ com dígito atual igual. No algoritmo, o vetor $C$ serve apenas como auxiliar ao processo de inverção das posições do elemento de $A$.\par
+A rotina Counting\_Sort, por sua vez, tem como lógica inferir a posição correta de um dado elemento $a$ de $A$ através da contagem de quantos elementos menores do que $a$ existem em $A$, e é exatamente essa a informação que $B$ guarda: na primeira iteração, contamos quantos elementos de $A$ possuem o dígito especificado pela variável $posicao$ igual a $i$; no segundo laço de iterações contamos também quantos elementos com o dito dígito menor do que $i$ existem em $A$, e salvamos essa informação em $B[i]$. Assim, é evidente que o número correto da posição de $A[i]$ será exatamente $B[chave] - 1$, em que $chave$ é o dígito considerado na chamada atual. Note que a cada iteração, decrementa-se o valor guardado em $B[chave]$, de modo a não se perder os elementos de $A$ com dígito atual igual. No algoritmo, o vetor $C$ serve apenas como auxiliar ao processo de inverção das posições do elemento de $A$.\par
 %
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{radix_sort.png}
-    \caption{Como esperado, a inclinação de todas as retas é próxima de 1, indicando o comportamento linear.}
-\end{figure}
-%
-É fácil ver que a complexidade do Radix\_Sort não se altera de acordo com o número de elementos já ordenados no vetor: não fazemos comparações dos elementos entre si, mas sim um procedimento de contagem, cuja complexidade depende apenas do tamanho de $A$. Assim, a complexidade total do algoritmo será, para qualquer vetor de tamanho $n$ \[s\cdot\left[(8 \cdot n + 1) + (1 + 9\cdot4) + (1 + 9\cdot n) + (1 + 3\cdot n)\right] = O(n),\]
+Assim, é fácil ver que a complexidade do Radix\_Sort não se altera de acordo com o número de elementos já ordenados no vetor: não fazemos comparações dos elementos entre si, mas sim um procedimento de contagem, cuja complexidade depende apenas do tamanho de $A$. Assim, a complexidade total do algoritmo será, para qualquer vetor de tamanho $n$ \[s\cdot\left[(8 \cdot n + 1) + (1 + 9\cdot4) + (1 + 9\cdot n) + (1 + 3\cdot n)\right] = O(n),\]
 em que $s$ corresponde ao número de dígitos do maior elemento do vetor.
 %
 \begin{table}
@@ -89,7 +77,7 @@ em que $s$ corresponde ao número de dígitos do maior elemento do vetor.
     \caption{Medidas de tempo para o RadixSort em segundos}
 \end{table}\par
 %
-Na tabela, ressaltamos os valores pequenos para o desvio padrão, que indicam que as medidas não se alteraram muito quando mudamos a forma de preencher o vetor a ser ordenado. Isso reforça a ideia de que a complexidade é a mesma para dois vetores quaisquer de mesmo tamanho.
+Na tabela, ressaltamos os valores pequenos para o desvio padrão, que indicam que as medidas não se alteraram muito quando mudamos a forma de preencher o vetor a ser ordenado. Isso reforça a ideia de que a complexidade é a mesma para dois vetores quaisquer de mesmo tamanho. Na imagem final, as medições de tempo comprovam o comportamento linear do Radixsort.
 \subsection{Heap Sort}
 O Heapsort é um algoritmo que se aproveita da estrutura de uma árvore binária para poder otimizar o processo de ordenação. A ideia básica é, dada uma estrutura heap (que no caso é uma árvore cujos nós pais sempre são maiores do que os nós filhos), invertemos, iterativamente, a posição do último nó da árvore com a raiz (que, pelo que dissemos, é o maior nó da árvore). Isso faz com que o último nó passe a ocupar sua posição correta. Contudo, pode ser que essa inversão estrague nossa estrutua de dados, e então a rotina Heapfy é chamada. No próximo laço, invertemos o penúltimo nó, e assim por diante.\par
 %
