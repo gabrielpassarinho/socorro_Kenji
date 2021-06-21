@@ -4,18 +4,16 @@
 \usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage{listings}
-
+%
 \title{%
     1º Projeto da disciplina Estruturas de Dados II \\
      \large Análise assintótica de algoritmos de ordenação}
-\author{Gabriel Passarelli 11218480\\ Marcelo Kenji Noda 11275359\ Danillo Mendes Santiago 10414592}
-\date{2021}
-
+\author{Danillo Mendes Santiago 10414592\\Gabriel Passarelli 11218480\\ Marcelo Kenji Noda 11275359}
+%
 \begin{document}
 %
 \maketitle
 %
-\newpage
 \section{Introdução}
 Nosso objetivo com este texto é analisar a complexidade de tempo de cinco algoritmos de ordenação distintos, implementados na parte prática do projeto em linguagem C de programação seguindo os pseudo-códigos fornecidos na proposta do trabalho.\par
 %
@@ -39,7 +37,7 @@ Nossas medições de tempo confirmam nossas análises teóricas, como bem se vê
         \hline
         Vetor crescente & $10^{-6}$ & $10^{-6}$ & $5\cdot 10^{-6}$ & $5.1\cdot 10^{-5}$ & $4.61\cdot 10^{-4}$\\
         \hline
-        Vetor decrescente & $2\cdot10^{-6}$ & $8.8\cdto10^{-5}$ & $7.3\cdot 10^{-3}$ & $5.3\cdot 10^{-1}$ & $52.12$\\
+        Vetor decrescente & $2\cdot10^{-6}$ & $8.8\cdot10^{-5}$ & $7.3\cdot 10^{-3}$ & $5.3\cdot 10^{-1}$ & $52.12$\\
         \hline
         Média & $2.33\cdot 10^{-6}$ & $6.8\cdot 10^{-5}$ & $4.18\cdot 10^{-3}$ & $3.59\cdot 10^{-1}$ & $37.72$ \\
         \hline
@@ -113,7 +111,6 @@ Como se vê claramente pelas medições de tempo contidas na tabela, a complexid
     \begin{tabular}{c|c|c|c|c|c}
         n = & $10^{1}$ & $10^{2}$ & $10^{3}$ & $10^{4}$ & $10^{5}$ \\ 
         \hline
-            0.000002    0.000016    0.000252    0.003246    0.037669
         Vetor aleatório & $5\cdot 10^{-6}$ & $4.9\cdot 10^{-5}$ & $3.3\cdot 10^{-4}$ & $3.81\cdot 10^{-3}$ & $4.49\cdot 10^{-2}$ \\
         \hline
         Vetor crescente & $2.0\cdot10^{-6}$ & $1.5\cdot 10^{-5}$ & $2.56\cdot 10^{-4}$ & $3.39\cdot 10^{-3}$ & $3.93\cdot 10^{-2}$\\
@@ -132,7 +129,7 @@ Como se vê claramente pelas medições de tempo contidas na tabela, a complexid
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{comparacao.png}
-    \caption{Comparação de tempos entre ordenações (escala logarítmica)}
+    \caption{Comparação de tempos de ordenação. O eixo x corresponde ao logaritmo do tamanho da entrada, e o eixo y, o logaritmo do tempo de ordenação. As legendas indicar o algoritmo a que se refere a respectiva reta, assim como a inclinação da mesma.}
 \end{figure} \par
 %
 Vemos pelos gráficos que o RadixSort é o algoritmo de ordenação mais eficiente, em média, quando tomamos entradas grandes. Nas análises teóricas, isso se torna evidente, pois, enquanto o Radixsort tem comportamento linear, os demais, excluindo o BubbleSort, têm comportamento $O(n \ln n)$. O BubbleSort tem como ponto positivo sua implementação fácil e rápida; contudo, os gráficos evidenciam que ele se torna inviável para situações em que o mínimo de eficiência no processo de ordenação é requerido. Mais ainda, ele e o QuickSort são ótimos exemplos do porquê se deve realizar a análise de complexidade de tempo de maneira completa: o Bubblesort tem comportamento linear em entradas ordenadas, e o Quicksort, apesar de, nas versões de implementação não randomizada (que não é o caso), ter comportamento quadrático, obteve aqui comportamento de ordem $n\ln n$. Cabe dizer ainda que, apesar de no caso geral, para vetores de qualquer entrada, o RadixSort ter obtido os melhores resultados, devemos notar que sua complexidade de tempo depende da quantidade de caracteres na chave de ordenação, de modo que, então, podem existir situações em que o número de caracteres se torne grande o suficiente para o Radixsort se tornar inferior aos outros métodos. Um exemplo, seria quando se precisa ordenar grandes strings.

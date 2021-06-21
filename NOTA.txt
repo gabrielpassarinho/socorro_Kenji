@@ -1,0 +1,6 @@
+
+O grupo teve problemas em desenvolver o trabalho pelo Netbeans, pois a IDE não conseguia encontrar
+as bibliotecas stdlib e math em nossos computadores. Assim, para evitar transtornos, incluímos os arquivos
+do projeto de maneira avulsa, além de um makefile. Para rodar o projeto pelo makefile (caso o
+problema que tivemos com o Netbeans persista com o prof), basta executar as linhas 'make', 
+para compilar, e 'make run', para executar.
