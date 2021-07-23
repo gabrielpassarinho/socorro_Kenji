@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{listings}
+%
+\title{%
+    2º Projeto da disciplina Estruturas de Dados II \\
+     \large Análise assintótica de algoritmos de ordenação}
+\author{Danillo Mendes Santiago 10414592\\Gabriel Passarelli 11218480\\ Marcelo Kenji Noda 11275359}
+%
+\begin{document}
+%
+\maketitle
+%
+\section{Introdução}
+O propósito deste texto é analisar a complexidade de tempo de algoritmos de busca sequancial e de busca por espalhamento. Eles foram implementados na parte prática do projeto, em linguagem C de programação, e seguindo os templates fornecidos na proposta do trabalho.\par
+%
+O texto está dividido em seções, e há uma seção para cada algoritmo implementado. Em cada um delas, apresentamos os resultados das medições do tempo de execução de cada algoritmo, e comentamos detalher pertinentes de nossa implementação. Nessa parte, incluímos tabelas para facilitar a visualização dos dados de tempo. Como cada medição foi realizada três vezes, as tabelas contêm também medidas de disperção dos dados (o desvio-padrão). Por fim, há uma seção apresentando as conclusões desenhadas pelo grupo.
+%
+\section{Análise dos algoritmos de busca sequancial}
+\subsection{Busca sequencial simples}
+%
+%
+%
+\subsection{Busca sequencial com método \textit{mover-para-frente}}
+%
+%
+%
+\subsection{Busca sequencial com método de \textit{transposição}}
+%
+%
+%
+\subsection{Busca sequencial com índice primário}
+%
+%
+%
+\section{Análise dos algoritmos de busca por espalhamento}
+\subsection{Hash com \textit{overflow progressivo}}
+%
+%
+%
+\subsection{Hash com \textit{hash duplo}}
+%
+%
+%
+\subsection{Hash aberto com lista encadeada não ordenada}
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MODELO PARA A TABELA %%
+\begin{comment}
+\begin{table}
+    \begin{tabular}{c|c|c|c|c|c}
+        n = & $10^{1}$ & $10^{2}$ & $10^{3}$ & $10^{4}$ & $10^{5}$ \\ 
+        \hline
+        Vetor aleatório & $5\cdot 10^{-6}$ & $4.9\cdot 10^{-5}$ & $3.3\cdot 10^{-4}$ & $3.81\cdot 10^{-3}$ & $4.49\cdot 10^{-2}$ \\
+        \hline
+        Vetor crescente & $2.0\cdot10^{-6}$ & $1.5\cdot 10^{-5}$ & $2.56\cdot 10^{-4}$ & $3.39\cdot 10^{-3}$ & $3.93\cdot 10^{-2}$\\
+        \hline
+        Vetor decrescente & $2\cdot10^{-6}$ & $1.6\cdot 10^{-5}$ & $2.52\cdot 10^{-4}$ & $3.25\cdot 10^{-3}$ & $3.77\cdot 10^{-2}$\\
+        \hline
+        Média & $3\cdot 10^{-6}$ & $2.67\cdot 10^{-5}$ & $2.79\cdot10^{-4}$ & $3.48\cdot 10^{-3}$ & $4.19\cdot 10^{-2}$ \\
+        \hline
+        Desvio Padrão & $1.41\cdot 10^{-6}$ & $1.58\cdot 10^{-5}$ & $3.59\cdot 10^{-5}$ & $2.42\cdot 10^{-4}$ & $4.88\cdot 10^{-3}$ \\
+    \end{tabular}
+    \caption{Medidas de tempo para o RadixSort em segundos}
+\end{table}\par
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusão}
+%
+%
+%
+\end{document}
