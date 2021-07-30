@@ -36,6 +36,26 @@ double finaliza_tempo()
     return ((double) (_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
+int buscar_elemento(int *tabela, int chave, int N){
+  for(int i = 0; i<N;i++){
+    if(tabela[i] == chave){
+      if(i==0){
+        // Caso o elemento já seja o primeiro, nada devera ser feito
+        return 1;
+      }else{
+        int aux;
+        // Realiza a trasnposicao
+        aux = tabela[i-1];
+        tabela[i-1] = tabela[i];
+        tabela[i] = aux;
+        return 1;
+      }
+    }
+  }
+  // retorna -1 caso nao encontre nada
+  return -1;
+}
+
 int main(int argc, char const *argv[])
 {
     const int N = 50000;
@@ -47,10 +67,13 @@ int main(int argc, char const *argv[])
     // realiza busca sequencia com realocação
     inicia_tempo();
     for (int i = 0; i < N; i++) {
+      if(buscar_elemento(entradas,consultas[i],N)<0){
+        encontrados++;
+      }
         // buscar o elemento consultas[i] na entrada
     }
     double tempo_busca = finaliza_tempo();
-
+    printf("Hello World");
     printf("Tempo de busca    :\t%fs\n", tempo_busca);
     printf("Itens encontrados :\t%d\n", encontrados);
 
