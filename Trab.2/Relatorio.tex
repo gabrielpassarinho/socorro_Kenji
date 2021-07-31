@@ -16,11 +16,11 @@
 \maketitle
 %
 \section{Introdução}
-O propósito deste texto é analisar a complexidade de tempo de algoritmos de busca sequancial e de busca por espalhamento. Eles foram implementados na parte prática do projeto, em linguagem C de programação, e seguindo os templates fornecidos na proposta do trabalho.\par
+O propósito deste texto é analisar a complexidade de tempo de algoritmos de busca sequencial e de busca por espalhamento. Eles foram implementados na parte prática do projeto, em linguagem C de programação, e seguindo os templates fornecidos na proposta do trabalho.\par
 %
-O texto está dividido em seções, e há uma seção para cada algoritmo implementado. Em cada um delas, apresentamos os resultados das medições do tempo de execução de cada algoritmo, e comentamos detalher pertinentes de nossa implementação. Nessa parte, incluímos tabelas para facilitar a visualização dos dados de tempo. Como cada medição foi realizada três vezes, as tabelas contêm também medidas de disperção dos dados (o desvio-padrão). Por fim, há uma seção apresentando as conclusões desenhadas pelo grupo.
+O texto está dividido em seções, e há uma seção para cada algoritmo implementado. Em cada um delas, apresentamos os resultados das medições do tempo de execução de cada algoritmo, e comentamos detalhes pertinentes de nossa implementação. Nessa parte, incluímos tabelas para facilitar a visualização dos dados de tempo. Como cada medição foi realizada três vezes, as tabelas contêm também medidas de dispersão dos dados (o desvio-padrão). Por fim, há uma seção apresentando as conclusões desenhadas pelo grupo.
 %
-\section{Análise dos algoritmos de busca sequancial}
+\section{Análise dos algoritmos de busca sequencial}
 \subsection{Busca sequencial simples}
 %
 %
@@ -38,35 +38,42 @@ O texto está dividido em seções, e há uma seção para cada algoritmo implem
 %
 %
 \section{Análise dos algoritmos de busca por espalhamento}
+Antes de irmos para a análise de cada implementação, faremos um comentário pertinente aos três exercícios, mas em especial ao primeiro e ao terceiro. Como bem se vê na \textit{main}, ao mesmo tempo em que realizamos a medição do tempo de inserção e a do de busca na tabela de hashing, contamos o número de colisões e o de itens encontrados, respectivamente. Contudo, isso não prejudica nossa análise comparativa dos diferentes hash's, pois, além dos custos dessas operações serem bem inferiores ao custo das operações de nosso interesse, elas incrementam na mesma porção o tempo medido em cada caso.
 \subsection{Hash com \textit{overflow progressivo}}
-Através da tabela 1
-\begin{table}[!]
+Para implementar o hashing com o método de overflow progressivo para tratamento de colisões, utilizamos a técnica apresentada em aula. Ou seja, caso haja uma colisão na tabela durante a inserção, iniciamos um laço de iterações percorrendo as posições seguintes da tabela até achar a primeira vazia. Evidentemente, se nesse processo acharmos o próprio elemento que estamos tentando inserir, o método é finalizado.\par
+Note que, em nossa implementação, uma posição é vazia se ela vale \textit{NULL}. Só há dois estados possíveis para uma posição de nossa tabela: vazia ou ocupada. Não temos um indicador para posições que já fora utilizadas, porque não fazemos remoções de elementos durante a execução do código. Contudo, como sabemos que nossas entradas não têm caracteres especiais, poderíamos facilmente ter implementado uma função de remoção apenas se utilizando de uma String "sinalizadora" com caracteres especiais para indicar posições cuja entrada já foi apagada uma vez.\par
+Além disso, um último detalhe sobre a implementação é que quem utilizar o hash escolherá a função de hash que irá querer através de um parâmetro passado para o construtor do hash. Quando uma função de busca ou inserção é chamada na função \textit{main}, um teste é realizado por tal função para saber qual a função de hash deve ser utilizada. Isso incrementa o custo de realização da operação em $1$, que é o custo de teste. Contudo, simplifica o uso das funções implementadas.\par
+Na tabela abaixo, vemos as medições de tempo para as operações de busca e inserção, além do número de colisões. Podemos, através dela, que a função de hash h\_div se adequou melhor aos dados com que trabalhamos, pois o número de colisões na tabela quando preenchida com ela é bem inferior ao que se obtém com a h\_mul. Isso, por sua vez, se reflete, como esperado, no tempo de inserção e no de busca: a h\_div foi cerca 4 vezes mais eficiente na hora de inserir elementos na tabela, e cerca de 3 vezes na hora de realizar buscas. Por fim, o valor pequeno no desvio-padrão indicar a consistência de nossas medidas.
+\begin{table}[h!]
     \begin{tabular}{c|c|c|c}
          & Inserção & Busca & Colisões \\ 
         \hline
-        h\_div & $\mu = 1.32\cdot 10^{-1},\;\sigma = 4.9\cdot10^{-4}$ & $\mu=3.29\cdot 10^{-1},\;\sigma = 3.36\cdot 10^{-3}$ & 28558 \\
+        h\_div & $\mu = 1.32\cdot 10^{-1},\;\sigma = 4.9\cdot10^{-4}$ & $\mu=3.29\cdot 10^{-1},\;\sigma = 3.36\cdot 10^{-3}$ & 25461 \\
         \hline
-        h\_mul & $\mu=4.08\cdot10^{-1},\;\sigma=4.25\cdot 10^{-3}$ & $\mu=9.4\cdot 10^{-1},\;\sigma=3.33\cdot 10^{-3}$ & 34333\\
+        h\_mul & $\mu=4.08\cdot10^{-1},\;\sigma=4.25\cdot 10^{-3}$ & $\mu=9.4\cdot 10^{-1},\;\sigma=3.33\cdot 10^{-3}$ & 33959\\
         \hline
     \end{tabular}
     \caption{Medidas de tempo e do número de colisões em cada hash. $\mu$ indica a média das medidas e $\sigma$, o desvio padrão. Todas as medidas estão em segundos.}
 \end{table}\par
-jnkjnk
+%
+%
 %
 \subsection{Hash com \textit{hash duplo}}
-pique pique 
-\begin{table}[!]
+A implementação desse exercício foi um pouco mais simples do que a do anterior. Isso porque agora só fizemos as medições de tempo para uma função hash. Em relação ao anterior, vemos que o número de colisões foi muito parecido com o da função de hash hash\_mul sozinha, o que não é estranho, já que a função de hash nesse caso está altamente relacionada à hash\_mul, evidentemente. Contudo, vemos que o tratamento da colisão é mais eficiente agora do que antes, pois o método de hash duplo tem medidas de tempo inferiores tanto na inserção dos dados quanto na busca. Essa maior eficiência se deve à capacidade desse método de distribuir mais uniformemente os dados.
+\begin{table}[h!]
     \begin{tabular}{c|c|c|c}
          & Inserção & Busca & Colisões \\ 
         \hline
         h & $\mu = 1.90\cdot 10^{-1},\;\sigma = 8.30\cdot10^{-3}$ & $\mu=3.89\cdot 10^{-1},\;\sigma = 3.44\cdot 10^{-3}$ & 33960 \\
     \end{tabular}
     \caption{Medidas de tempo e do número de colisões no hash duplo. $\mu$ indica a média das medidas e $\sigma$, o desvio padrão. Todas as medidas estão em segundos.}
-\end{table}\par
+\end{table}
 %
 \subsection{Hash aberto com lista encadeada não ordenada}
 %
-\begin{table}[!]
+Neste exercício, a implementação da tabela de Hashing foi bem mais simples do que as anteriores. Contudo, a facilidade inicial foi compensada pela necessidade de se implementar uma lista encadeada. Como esperado, o número de colisões aqui é consideravelmente menor do que nos outros métodos.\par
+Além disso, as operações de busca e de inserção também são mais eficientes. Isso tem a ver com o fato de que, em nossa implementação do exercício a, calculamos a representação inteira da palavra a ser inserida ou buscada a cada nova iteração do for que percorre a tabela de hashing (guardar o valor em uma variável e utilizá-lo a cada novo laço seria uma forma de otimizar o código, portanto), e também com o fato de que na lista encadeada o número de iterações que teremos que fazer até chegar ao final da lista pode ser menor do que o número de iterações que teremos que fazer até chegar numa posição vazia da tabela da hashing. Para enxergar isso, podemos imaginar um procedimento de inserção nas duas tabelas de hashing: suponha que houve uma colisão na posição $x$ e que essa foi a primeira colisão de algum elemento com $x$; na lista encadeada, simplismente iremos inserir um novo elemento, sem ter que percorrer nenhum outro; na tabela com overflow progressivo, iremos caminhar até a próxima posição vazia, o que pode custar até B iterações.
+\begin{table}[h!]
     \begin{tabular}{c|c|c|c}
          & Inserção & Busca & Colisões \\ 
         \hline
