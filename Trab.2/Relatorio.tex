@@ -39,39 +39,47 @@ O texto está dividido em seções, e há uma seção para cada algoritmo implem
 %
 \section{Análise dos algoritmos de busca por espalhamento}
 \subsection{Hash com \textit{overflow progressivo}}
-%
-%
+Através da tabela 1
+\begin{table}[!]
+    \begin{tabular}{c|c|c|c}
+         & Inserção & Busca & Colisões \\ 
+        \hline
+        h\_div & $\mu = 1.32\cdot 10^{-1},\;\sigma = 4.9\cdot10^{-4}$ & $\mu=3.29\cdot 10^{-1},\;\sigma = 3.36\cdot 10^{-3}$ & 28558 \\
+        \hline
+        h\_mul & $\mu=4.08\cdot10^{-1},\;\sigma=4.25\cdot 10^{-3}$ & $\mu=9.4\cdot 10^{-1},\;\sigma=3.33\cdot 10^{-3}$ & 34333\\
+        \hline
+    \end{tabular}
+    \caption{Medidas de tempo e do número de colisões em cada hash. $\mu$ indica a média das medidas e $\sigma$, o desvio padrão. Todas as medidas estão em segundos.}
+\end{table}\par
+jnkjnk
 %
 \subsection{Hash com \textit{hash duplo}}
-%
-%
+pique pique 
+\begin{table}[!]
+    \begin{tabular}{c|c|c|c}
+         & Inserção & Busca & Colisões \\ 
+        \hline
+        h & $\mu = 1.90\cdot 10^{-1},\;\sigma = 8.30\cdot10^{-3}$ & $\mu=3.89\cdot 10^{-1},\;\sigma = 3.44\cdot 10^{-3}$ & 33960 \\
+    \end{tabular}
+    \caption{Medidas de tempo e do número de colisões no hash duplo. $\mu$ indica a média das medidas e $\sigma$, o desvio padrão. Todas as medidas estão em segundos.}
+\end{table}\par
 %
 \subsection{Hash aberto com lista encadeada não ordenada}
 %
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% MODELO PARA A TABELA %%
-\begin{comment}
-\begin{table}
-    \begin{tabular}{c|c|c|c|c|c}
-        n = & $10^{1}$ & $10^{2}$ & $10^{3}$ & $10^{4}$ & $10^{5}$ \\ 
+\begin{table}[!]
+    \begin{tabular}{c|c|c|c}
+         & Inserção & Busca & Colisões \\ 
         \hline
-        Vetor aleatório & $5\cdot 10^{-6}$ & $4.9\cdot 10^{-5}$ & $3.3\cdot 10^{-4}$ & $3.81\cdot 10^{-3}$ & $4.49\cdot 10^{-2}$ \\
+        h\_div & $\mu = 3.88\cdot 10^{-2},\;\sigma = 7.0\cdot10^{-4}$ & $\mu=6.03\cdot 10^{-2},\;\sigma = 6.3\cdot 10^{-4}$ & 28558 \\
         \hline
-        Vetor crescente & $2.0\cdot10^{-6}$ & $1.5\cdot 10^{-5}$ & $2.56\cdot 10^{-4}$ & $3.39\cdot 10^{-3}$ & $3.93\cdot 10^{-2}$\\
+        h\_mul & $\mu=1.26\cdot10^{-1},\;\sigma=2.04\cdot 10^{-3}$ & $\mu=2.43\cdot 10^{-1},\;\sigma=4.33\cdot 10^{-3}$ & 34333\\
         \hline
-        Vetor decrescente & $2\cdot10^{-6}$ & $1.6\cdot 10^{-5}$ & $2.52\cdot 10^{-4}$ & $3.25\cdot 10^{-3}$ & $3.77\cdot 10^{-2}$\\
-        \hline
-        Média & $3\cdot 10^{-6}$ & $2.67\cdot 10^{-5}$ & $2.79\cdot10^{-4}$ & $3.48\cdot 10^{-3}$ & $4.19\cdot 10^{-2}$ \\
-        \hline
-        Desvio Padrão & $1.41\cdot 10^{-6}$ & $1.58\cdot 10^{-5}$ & $3.59\cdot 10^{-5}$ & $2.42\cdot 10^{-4}$ & $4.88\cdot 10^{-3}$ \\
     \end{tabular}
-    \caption{Medidas de tempo para o RadixSort em segundos}
+    \caption{Medidas de tempo e do número de colisões em cada hash. $\mu$ indica a média das medidas e $\sigma$, o desvio padrão. Todas as medidas estão em segundos.}
 \end{table}\par
-\end{comment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \section{Conclusão}
+%% incluir grafico %%
 %
 %
 %
