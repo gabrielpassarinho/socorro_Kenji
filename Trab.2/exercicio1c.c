@@ -1,3 +1,9 @@
+/* Autores (a partir do codigo fornecido)
+Danillo Mendes Santiago 10414592
+Gabriel Passarelli 11218480
+Marcelo Kenji Noda 11275359
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -67,15 +73,15 @@ int main(int argc, char const *argv[])
     // realiza busca sequencia com realocação
     inicia_tempo();
     for (int i = 0; i < N; i++) {
-      if(buscar_elemento(entradas,consultas[i],N)<0){
+      if(buscar_elemento(entradas,consultas[i],N)>0){
         encontrados++;
       }
         // buscar o elemento consultas[i] na entrada
     }
     double tempo_busca = finaliza_tempo();
-    printf("Hello World");
     printf("Tempo de busca    :\t%fs\n", tempo_busca);
     printf("Itens encontrados :\t%d\n", encontrados);
 
     return 0;
 }
+

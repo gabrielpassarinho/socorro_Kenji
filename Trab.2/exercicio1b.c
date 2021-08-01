@@ -1,3 +1,8 @@
+/* Autores (a partir do codigo fornecido)
+Danillo Mendes Santiago 10414592
+Gabriel Passarelli 11218480
+Marcelo Kenji Noda 11275359
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -36,6 +41,26 @@ double finaliza_tempo()
     return ((double) (_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
+int buscar_elemento(int *tabela, int chave, int N){
+  for(int i = 0; i<N;i++){
+    if(tabela[i] == chave){
+      if(i==0){
+        // Caso o elemento já seja o primeiro, nada devera ser feito
+        return 1;
+      }else{
+        int aux;
+        // Realiza a trasnposicao
+        aux = tabela[0];
+        tabela[0] = tabela[i];
+        tabela[i] = aux;
+        return 1;
+      }
+    }
+  }
+  // retorna -1 caso nao encontre nada
+  return -1;
+}
+
 int main(int argc, char const *argv[])
 {
     const int N = 50000;
@@ -44,10 +69,12 @@ int main(int argc, char const *argv[])
     int* entradas = ler_inteiros("inteiros_entrada.txt", N);
     int* consultas = ler_inteiros("inteiros_busca.txt", N);
 
-    // realiza busca sequencia com realocação
+    // realiza busca sequencial com realocação
     inicia_tempo();
     for (int i = 0; i < N; i++) {
-        // buscar o elemento consultas[i] na entrada
+      if(buscar_elemento(entradas,consultas[i],N)>0){
+        encontrados++;
+      }
     }
     double tempo_busca = finaliza_tempo();
 

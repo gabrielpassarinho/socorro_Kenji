@@ -23,19 +23,27 @@ O texto está dividido em seções, e há uma seção para cada algoritmo implem
 \section{Análise dos algoritmos de busca sequencial}
 \subsection{Busca sequencial simples}
 %
-%
+A busca sequencial básica é um algorítmo bem intuitivo e não apresenta grandes dificuldades de implementação, ela basicamente percorre os indices da lista em ordem crescente e, a cada iteração, verifica se o indice atual comporta o elemento buscado. Nossa implementação percorre diretamente o vetor com os dados fornecidos, sendo necessário portanto o conhecimento do tamanho do vetor previamente.
+A eficiência do algorítmo é linear pois ele itera sobre a quantidade de elementos no vetor.
 %
 \subsection{Busca sequencial com método \textit{mover-para-frente}}
 %
-%
+Nesta variação o objetivo é criar uma busca auto-organizante, para facilitar proximas buscas ao longo do tempo. Para este método, isso se dá ao mover os elementos mais buscados ao início da fila.
+Assim como a busca simples, é de fácil implementação e não requere memória extra, para fazê-lo itera-se por todo vetor e caso encontre o elemento, move-o para o início do vetor, portanto é garantido eficiência linear no pior caso.
+O método de mover para frente gera ótimas respostas para buscas repetitivas porém não é muito seletivo, isso significa que ela pode priorizar nós pouco frequentes tanto como nós corriqueiros.
+No caso médio, cada item tem probabilidade $1/n$ de ser acessado, a ordenação dos elementos é irrelevante então a complexidade média é $T(n) = 1/n + 2/n + 3/n + ... + n/n = (1 + 2 + 3 + ... + n)/n = (n+1)/2$, porém conforme é ordenada pelo uso a eficiência aumenta drasticamente.
 %
 \subsection{Busca sequencial com método de \textit{transposição}}
 %
-%
+A busca sequencial com o método de transposição foi realizado de forma semelhante ao método de mover-para-frente, sendo que a principal diferença é a mudança de posição do elemento encontrado para a posição anterior ao invés da posição inicial.De forma similar ao método mover-para-frente, essa busca é possui maior eficiência para problemas em que as buscas por um mesmo elemento occorrem com maior frequência.
 %
 \subsection{Busca sequencial com índice primário}
 %
-%
+Primeiramente, para que fosse possível executar a busca sequencial com índice primário foi necessário ordenar o vetor com as entradas. Para isso, foi utilizada a função "qsort" da biblioteca C. Em seguida, a tabela de índice primário,no caso do problema, um vetor de inteiros, foi criada com o tamanho $T=\frac{50000}{10000}=5$. A tabela de índices armazenou os elementos das posições múltiplas de T do vetor de entradas, de forma que o dividisse em buckets.
+
+Uma função auxiliar para "encontrar o bucket" foi implementada, ela recebe como parâmetro a tabela de índices e o elemento procurado, a partir desses dois elementos, ela retorna o bucket correspondente do elemento, caso esse exista.
+
+Por fim, caso exista um bucket no qual o elemento possa estar contido, é realizado uma busca dentro desse espaço.
 %
 \section{Análise dos algoritmos de busca por espalhamento}
 Antes de irmos para a análise de cada implementação, faremos um comentário pertinente aos três exercícios, mas em especial ao primeiro e ao terceiro. Como bem se vê na \textit{main}, ao mesmo tempo em que realizamos a medição do tempo de inserção e a do de busca na tabela de hashing, contamos o número de colisões e o de itens encontrados, respectivamente. Contudo, isso não prejudica nossa análise comparativa dos diferentes hash's, pois, além dos custos dessas operações serem bem inferiores ao custo das operações de nosso interesse, elas incrementam na mesma porção o tempo medido em cada caso.
@@ -86,8 +94,43 @@ Além disso, as operações de busca e de inserção também são mais eficiente
 \end{table}\par
 %
 \section{Conclusão}
+A figura \ref{fig:graficoresultados} apresenta o tempo médio na execução dos diferentes tipos de buscas realizadas. O tempo em questão representa apenas o tempo para o processo de busca, isso é, desconsiderando o tratamento anterior para algumas outras estruturas.
+
 %% incluir grafico %%
-%
-%
-%
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=13cm]{grafico.png}
+    \caption{Resultados obtidos}
+    \label{fig:graficoresultados}
+\end{figure}
+
+As tabelas \ref{tab:resultados} e  \ref{tab:resultados2} apresentam os resultados numéricos da média e do desvio padrão
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+         & 1a & 1b & 1c & 1d   \\ \hline
+      Média & 5.2781 & 5.1793 &  5.0190& 0.5533  \\\hline
+      Desvio Padrão & 0.0853 & 0.0759 &  0.0860 & 0.0086 \\\hline
+    \end{tabular}
+    \caption{Tabela com resultados da Parte I}
+    \label{tab:resultados}
+\end{table}
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+         & 2a   & 2b & 2c   \\ \hline
+      Média & 0.3536 & 0.4864 &  0.0547 \\\hline
+      Desvio Padrão & 0.0663 &  0.0616 &  0.0023\\ \hline
+    \end{tabular}
+    \caption{Tabela com resultados da Parte II}
+    \label{tab:resultados2}
+\end{table}
+
+A partir das tabelas e dos gráficos é possível verificar uma diferença significativa entre maioria das buscas sequenciais e das buscas por espalhamento. Sendo a principal delas a busca através do método de mover-para-frente.
+Além disso, é possível perceber que os métodos que realizam algum tipo de "tratamento" anterior ao processo de busca, como a busca sequencial com índice primário e as buscas por espalhamento apresentaram um desempenho melhor.
 \end{document}

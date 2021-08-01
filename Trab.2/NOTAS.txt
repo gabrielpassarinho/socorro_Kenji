@@ -1,7 +1,8 @@
 Instrucoes para compilar o trabalho.
-1.a:
-1.b:
-1.c:
+1.a: gcc exercicio1a.c lista_int.c -lm -o exercicio1a
+1.b: gcc exercicio1b.c lista_int.c -lm -o exercicio1b
+1.c: gcc exercicio1c.c -lm -o exercicio1c
+1.d: gcc exercicio1d.c -lm -o exercicio1d
 2.a: gcc exercicio2a.c -lm -o exercicio2a
 2.b: gcc exercicio2b.c -lm -o exercicio2b
 2.c: gcc exercicio2c.c lista.c -o exercicio2c
