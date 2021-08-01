@@ -1,6 +1,12 @@
+/* Autores (a partir do codigo fornecido)
+Danillo Mendes Santiago 10414592
+Gabriel Passarelli 11218480
+Marcelo Kenji Noda 11275359
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "lista_int.h"
 
 // Definição das variaveis que controlam a medição de tempo
 clock_t _ini, _fim;
@@ -36,21 +42,43 @@ double finaliza_tempo()
     return ((double) (_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
-int main(int argc, char const *argv[])
-{
+int busca_sequencial_simples(lista_int* l, int elem){
+    No* aux = l->primeiro;
+
+    while(aux->proximo != NULL){
+        if(aux->valor == elem){
+            return 1;//encontrou
+        }
+        aux = aux->proximo;
+    }       
+            
+    return 0;//nao achou
+}
+
+int main(int argc, char const *argv[]){
     const int N = 50000;
     unsigned encontrados = 0;
 
     int* entradas = ler_inteiros("inteiros_entrada.txt", N);
-    int* consultas = ler_inteiros("inteiros_busca.txt", N);
+    int* consultas = ler_inteiros("inteiros_busca.txt", N);    
+
+    lista_int* l;
+    cria_lista(l);
+
+    for (int i = 0; i < N; i++){
+        insere_lista(l, entradas[i]);
+    }
 
     // realiza busca sequencial
     inicia_tempo();
     for (int i = 0; i < N; i++) {
         // buscar o elemento consultas[i] na entrada
+        encontrados += busca_sequencial_simples(l, consultas[i]);
     }
+
     double tempo_busca = finaliza_tempo();
 
+    
     printf("Tempo de busca    :\t%fs\n", tempo_busca);
     printf("Itens encontrados :\t%d\n", encontrados);
 
